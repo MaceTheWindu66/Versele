@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AnswerRow from '../components/AnswerRow';
+
 const Home: React.FC = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
@@ -16,18 +18,13 @@ const Home: React.FC = () => {
                     </p>
                 </div>
                 {/* Input / Answers Here */}
-                <div className="flex flex-col items-center justify-center h-[70%] w-full mt-4 bg-gray-200 rounded-xl shadow-sm">
+                <div className="flex flex-col items-center justify-center h-[70%] w-full mt-4 bg-gray-200 rounded-xl shadow-sm p-8">
                     {/* Input Row for Each Answer */}
-                    <div className="flex flex-row items-center justify-center w-full mb-4">
-                        <input
-                            type="text"
-                            placeholder="Type your answer here..."
-                            className="w-3/4 p-4 text-lg rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
-                        <button className="ml-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            Submit
-                        </button>
-                    </div>
+                    <AnswerRow />
+                    <AnswerRow />
+                    <AnswerRow />
+                    <AnswerRow />
+                    <AnswerRow />
                 </div>
             </div>
         </div>
