@@ -42,8 +42,8 @@ export default function App() {
   const [target, setTarget] = useState(pickRandomVerse());
   const [guesses, setGuesses] = useState([]);
   const [book, setBook] = useState(BOOKS[0]);
-  const [chapter, setChapter] = useState(1);
-  const [verse, setVerse] = useState(1);
+  const [chapter, setChapter] = useState("1");
+  const [verse, setVerse] = useState("1");
   const [message, setMessage] = useState("");
   const [done, setDone] = useState(false);
 
@@ -117,7 +117,6 @@ export default function App() {
 
 
 
-
    return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center p-4">
       <div className="w-full space-y-4">
@@ -160,7 +159,11 @@ export default function App() {
               min={1}
               className="mt-1 w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm"
               value={chapter}
-              onChange={(e) => setChapter(e.target.valueAsNumber || 1)}
+              onChange={(e) => setChapter(e.target.value)}   // keep as string while typing
+              onBlur={() => {
+                const n = parseInt(chapter, 10);
+                setChapter(Number.isFinite(n) && n >= 1 ? String(n) : "1");
+              }}
             />
           </div>
           <div>
@@ -170,7 +173,11 @@ export default function App() {
               min={1}
               className="mt-1 w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm"
               value={verse}
-              onChange={(e) => setVerse(e.target.valueAsNumber || 1)}
+              onChange={(e) => setVerse(e.target.value)}
+              onBlur={() => {
+                const n = parseInt(verse, 10);
+                setVerse(Number.isFinite(n) && n >= 1 ? String(n) : "1");
+              }}
             />
           </div>
         </div>
@@ -214,7 +221,7 @@ export default function App() {
 
         {/* Help */}
         <details className="mt-2 text-sm text-zinc-300">
-          <summary className="cursor-pointer text-zinc-200">How to play</summary>
+          <summary className="cursor-pointer text-zinc-200">How to Play</summary>
           <div className="mt-2 space-y-1">
             <p>A verse is shown above. Guess its reference by choosing the Book and entering Chapter and Verse. You have {MAX_GUESSES} tries.</p>
             <p>Book feedback: <span className="text-green-400">green</span> = correct; <span className="text-yellow-400">yellow</span> = the right book is earlier/later in the Bible.</p>
